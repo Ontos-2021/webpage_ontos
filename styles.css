@@ -10,27 +10,34 @@
     --primary-color: #ff0054;
     --secondary-color: #cc0044;
     --bg-color: #ffffff;
-    --text-color: #333;
-    --hero-text-color: #333; /* nuevo: color del título en light */
-    --navbar-bg: rgba(255, 255, 255, 0.9);
+    --text-color: #333333;
+    --hero-text-color: #ffffff; /* Cambiado: siempre blanco para mejor contraste con el hero background */
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+    --card-bg: #f8f8f8;
+    --footer-bg: #f0f0f0;
+    --border-color: #dddddd;
     --transition: all 0.3s ease;
 }
 
 /* 🌙 Modo oscuro automático según preferencia del usuario */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #1a1a1a;
-        --text-color: #ddd; /* actualizado */
-        --hero-text-color: #fff; /* nuevo en dark */
-        --navbar-bg: rgba(0, 0, 0, 0.9);
+        --bg-color: #121212;
+        --text-color: #ffffff;
+        --navbar-bg: rgba(18, 18, 18, 0.95);
+        --card-bg: #1e1e1e;
+        --footer-bg: #1a1a1a;
+        --border-color: #333333;
     }
 }
 
 [data-theme="dark"] {
-    --bg-color: #1a1a1a;
-    --text-color: #ddd; /* actualizado */
-    --hero-text-color: #fff; /* nuevo en dark */
-    --navbar-bg: rgba(0, 0, 0, 0.9);
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --navbar-bg: rgba(18, 18, 18, 0.95);
+    --card-bg: #1e1e1e;
+    --footer-bg: #1a1a1a;
+    --border-color: #333333;
 }
 
 html {
@@ -66,6 +73,7 @@ body {
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    color: var(--text-color); /* Asegurar que el color del logo cambie con el tema */
 }
 
 .nav-links {
@@ -112,7 +120,12 @@ body {
 
 /* ======= HERO SECTION ======= */
 .hero-section {
-    background: url("https://via.placeholder.com/1200x600") center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+                url("./assets/background.jpg"); /* Asegúrate de crear la carpeta assets y colocar la imagen ahí */
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed; /* Efecto parallax */
+    background-repeat: no-repeat;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -120,7 +133,24 @@ body {
     align-items: center;
     text-align: center;
     padding: 5rem 2rem;
-    color: var(--hero-text-color); /* actualizado */
+    color: var(--hero-text-color);
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Overlay oscuro */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Por encima del overlay */
 }
 
 .hero-content h2 {
@@ -169,15 +199,45 @@ main {
 }
 
 .service-item {
-    background: #f8f8f8;
+    background: var(--card-bg);
     padding: 1.5rem;
     border-radius: 8px;
     text-align: center;
     transition: var(--transition);
+    border: 1px solid var(--border-color);
 }
 
 .service-item:hover {
     transform: scale(1.05);
+}
+
+.service-item h3 {
+    color: #333333; /* Color fijo oscuro independiente del tema */
+    margin-bottom: 0.5rem;
+}
+
+/* Asegurar que el modo oscuro no afecte el color del h3 */
+[data-theme="dark"] .service-item h3 {
+    color: #ffffff; /* Cambiado a blanco para modo oscuro */
+}
+
+.service-image {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.service-item:hover .service-image img {
+    transform: scale(1.1);
 }
 
 /* ======= PORTFOLIO ======= */
@@ -194,11 +254,12 @@ main {
 }
 
 .portfolio-item {
-    background: #f8f8f8;
+    background: var(--card-bg);
     padding: 1.5rem;
     border-radius: 8px;
     text-align: center;
     transition: var(--transition);
+    border: 1px solid var(--border-color);
 }
 
 .portfolio-item:hover {
@@ -227,9 +288,11 @@ main {
 .contact-form textarea {
     width: 100%;
     padding: 0.7rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     font-size: 1rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 .contact-form input:focus,
@@ -257,7 +320,7 @@ main {
 footer {
     text-align: center;
     padding: 1rem;
-    background-color: #f0f0f0;
+    background-color: var(--footer-bg);
 }
 
 .social-links {
@@ -281,6 +344,8 @@ footer {
 @media (max-width: 768px) {
     .hero-section {
         min-height: 60vh;
+        background-attachment: scroll; /* Deshabilitar parallax en móviles */
+        background-position: center center;
     }
 
     .hero-content h2 {
@@ -316,6 +381,10 @@ footer {
     .nav-links li a {
         display: block;
         width: 100%;
+    }
+
+    .service-image {
+        height: 180px;
     }
 }
 
@@ -396,6 +465,12 @@ footer {
     }
 }
 
+@media (max-width: 480px) {
+    .service-image {
+        height: 160px;
+    }
+}
+
 /* Dispositivos muy pequeños */
 @media (max-width: 480px) {
     .hero-section {
@@ -448,6 +523,14 @@ footer {
     .nav-links.mobile-active {
         max-height: 80vh;
         overflow-y: auto;
+    }
+}
+
+/* Optimización para retina displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-section {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+                         url("./assets/background@2x.jpg"); /* Versión 2x de la imagen */
     }
 }
 

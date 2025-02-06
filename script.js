@@ -10,12 +10,32 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
     }
 
+    // Mejorar la transición del tema
+    const toggleTheme = (isDark) => {
+        // Agregar clase de transición
+        document.documentElement.classList.add('theme-transition');
+        
+        // Cambiar tema
+        body.dataset.theme = isDark ? 'dark' : '';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        
+        // Toggle del icono
+        const icon = themeToggle.querySelector('i');
+        icon.classList.replace(
+            isDark ? 'fa-moon' : 'fa-sun',
+            isDark ? 'fa-sun' : 'fa-moon'
+        );
+
+        // Remover clase de transición después de la animación
+        setTimeout(() => {
+            document.documentElement.classList.remove('theme-transition');
+        }, 300);
+    };
+
+    // Reemplazar el listener existente del tema
     themeToggle.addEventListener('click', () => {
-        const isDark = body.dataset.theme === 'dark';
-        body.dataset.theme = isDark ? '' : 'dark';
-        localStorage.setItem('theme', isDark ? 'light' : 'dark');
-        themeToggle.querySelector('i').classList.toggle('fa-sun');
-        themeToggle.querySelector('i').classList.toggle('fa-moon');
+        const isDark = body.dataset.theme !== 'dark';
+        toggleTheme(isDark);
     });
 
     themeToggle.addEventListener('keypress', (e) => {
