@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio personal de José Mercado - Desarrollador Web">
+    <meta name="description" content="Portfolio personal de José Mercado - Ingeniero de Sonido & Productor Musical">
     <title>José Mercado - Portfolio</title>
-    <!-- Enlazamos la hoja de estilos externa -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Contenedor principal para el encabezado y la imagen de fondo -->
     <header class="hero-section">
         <nav class="navbar">
             <div class="logo">JM</div>
-            <button id="theme-toggle" aria-label="Toggle dark mode">
+            <button id="theme-toggle" aria-label="Cambiar modo oscuro" tabindex="0">
                 <i class="fas fa-moon"></i>
+            </button>
+            <!-- Agregado: botón para menú móvil -->
+            <button id="mobile-menu-toggle" aria-label="Toggle menu" tabindex="0">
+                <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#portafolio">Portafolio</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
         <div class="hero-content">
             <h2>Ingeniero de Sonido & Productor Musical</h2>
             <p>Transformo tus ideas sonoras en experiencias únicas</p>
-            <a href="#contacto" class="btn-cta">Contáctame</a>
+            <button class="btn-cta" onclick="document.querySelector('#contacto').scrollIntoView({behavior: 'smooth'})">Contáctame</button>
         </div>
     </header>
 
@@ -54,17 +56,16 @@
             <h2>Portafolio</h2>
             <p>Escucha algunos de mis trabajos más recientes:</p>
             <div class="portfolio-grid">
-                <!-- Ejemplo de item de portafolio -->
                 <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400" alt="Proyecto 1">
+                    <img src="proyecto1.jpg" alt="Proyecto de mezcla musical" loading="lazy">
                     <h3>Proyecto 1</h3>
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400" alt="Proyecto 2">
+                    <img src="proyecto2.jpg" alt="Proyecto de masterización" loading="lazy">
                     <h3>Proyecto 2</h3>
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400" alt="Proyecto 3">
+                    <img src="proyecto3.jpg" alt="Producción musical original" loading="lazy">
                     <h3>Proyecto 3</h3>
                 </div>
             </div>
@@ -72,17 +73,16 @@
 
         <section id="contacto" class="contact-section">
             <h2>Contacto</h2>
-            <p>Para más información o contratación, completa el siguiente formulario.</p>
             <form id="contactForm" class="contact-form">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
-                
+
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
-                
+
                 <label for="mensaje">Mensaje:</label>
                 <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-                
+
                 <button type="submit" class="btn-submit">Enviar</button>
             </form>
         </section>
@@ -90,14 +90,13 @@
 
     <footer>
         <div class="social-links">
-            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="GitHub" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
         </div>
         <p>&copy; 2025 José Mercado. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Archivo JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
