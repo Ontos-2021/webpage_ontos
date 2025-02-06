@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
+    const fallbackImage = './assets/default.webp'; // Ruta de la imagen de respaldo
 
     // Guardar preferencia del usuario en localStorage
     if (localStorage.getItem('theme') === 'dark') {
@@ -65,6 +66,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth > 768) {
             navLinks.classList.remove('mobile-active');
         }
+    });
+
+    // Manejar errores de carga de imágenes
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', () => {
+            img.src = fallbackImage;
+            img.classList.add('default-image'); // Agregar clase para estilos específicos
+        });
     });
 
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
