@@ -840,3 +840,9 @@ img[src$="default.webp"] {
 [data-theme="dark"] .spotify-embed {
     background-color: #282828;
 }
+
+[data-theme="dark"] .contact-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}

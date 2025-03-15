@@ -5,27 +5,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelector('.nav-links');
     const fallbackImage = './assets/default.webp'; // Ruta de la imagen de respaldo
 
-    // Guardar preferencia del usuario en localStorage
-    if (localStorage.getItem('theme') === 'dark') {
-        body.dataset.theme = 'dark';
-        themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-    }
+    // Eliminar duplicación: quitamos la verificación inicial y dejamos que setInitialTheme() la maneje
 
-    // Mejorar la transición del tema
     const toggleTheme = (isDark) => {
-        // Agregar clase de transición
         document.documentElement.classList.add('theme-transition');
         
-        // Cambiar tema
-        body.dataset.theme = isDark ? 'dark' : '';
+        body.dataset.theme = isDark ? 'dark' : 'light';
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         
-        // Toggle del icono
         const icon = themeToggle.querySelector('i');
-        icon.classList.replace(
-            isDark ? 'fa-moon' : 'fa-sun',
-            isDark ? 'fa-sun' : 'fa-moon'
-        );
+        if (isDark) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
 
         // Actualizar color del iframe de Spotify
         const spotifyIframe = document.querySelector('.spotify-embed iframe');
@@ -35,32 +30,28 @@ document.addEventListener('DOMContentLoaded', () => {
             spotifyIframe.src = currentSrc.toString();
         }
 
-        // Remover clase de transición después de la animación
         setTimeout(() => {
             document.documentElement.classList.remove('theme-transition');
         }, 300);
     };
 
-    // Reemplazar el listener existente del tema
     themeToggle.addEventListener('click', () => {
         const isDark = body.dataset.theme !== 'dark';
         toggleTheme(isDark);
     });
 
     themeToggle.addEventListener('keypress', (e) => {
-        if (e.key === "Enter") themeToggle.click();
+        if (e.key === 'Enter') themeToggle.click();
     });
 
-    // Nuevo: listener para el menú móvil
     mobileMenuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('mobile-active');
     });
 
     mobileMenuToggle.addEventListener('keypress', (e) => {
-        if (e.key === "Enter") mobileMenuToggle.click();
+        if (e.key === 'Enter') mobileMenuToggle.click();
     });
 
-    // Cerrar menú móvil al hacer clic en un enlace
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth <= 768) {
@@ -69,25 +60,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Cerrar menú móvil al redimensionar la ventana
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) {
             navLinks.classList.remove('mobile-active');
         }
     });
 
-    // Manejar errores de carga de imágenes
     document.querySelectorAll('img').forEach(img => {
         img.addEventListener('error', () => {
             img.src = fallbackImage;
-            img.classList.add('default-image'); // Agregar clase para estilos específicos
+            img.classList.add('default-image');
         });
     });
 
-    // Detectar preferencia del sistema
+    // Detectar preferencia del sistema y establecer tema inicial
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    // Función para establecer el tema inicial
     const setInitialTheme = () => {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
@@ -99,13 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
             body.dataset.theme = 'dark';
             themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
             localStorage.setItem('theme', 'dark');
+        } else {
+            body.dataset.theme = 'light';
+            localStorage.setItem('theme', 'light');
         }
-    }
+    };
 
-    // Establecer tema inicial
     setInitialTheme();
 
-    // Escuchar cambios en la preferencia del sistema
     prefersDarkScheme.addEventListener('change', (e) => {
         if (!localStorage.getItem('theme')) {
             toggleTheme(e.matches);
