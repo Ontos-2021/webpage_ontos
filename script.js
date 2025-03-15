@@ -84,26 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    document.getElementById('contactForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const nombre = form.nombre.value.trim();
-        const email = form.email.value.trim();
-        const mensaje = form.mensaje.value.trim();
-
-        if (!nombre || !email || !mensaje) {
-            alert('Por favor, completa todos los campos.');
-            return;
-        }
-
-        form.querySelector('.btn-submit').disabled = true;
-        setTimeout(() => {
-            alert(`¡Gracias, ${nombre}! Me pondré en contacto contigo pronto.`);
-            form.reset();
-            form.querySelector('.btn-submit').disabled = false;
-        }, 1000);
-    });
-
     // Detectar preferencia del sistema
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     
