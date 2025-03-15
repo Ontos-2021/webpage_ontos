@@ -75,7 +75,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Detectar preferencia del sistema y establecer tema inicial
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
     const setInitialTheme = () => {
+        if (isIOS()) {
+            // Forzar modo light en iOS para evitar problemas conocidos
+            body.dataset.theme = 'light';
+            localStorage.setItem('theme', 'light');
+            themeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+            return;
+        }
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             body.dataset.theme = savedTheme;
