@@ -125,8 +125,8 @@ body {
 
 /* ======= HERO SECTION ======= */
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
-                url("./assets/background.jpg"); /* Asegúrate de crear la carpeta assets y colocar la imagen ahí */
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+                url("./assets/background.webp");
     background-position: center;
     background-size: cover;
     background-attachment: fixed; /* Efecto parallax */
@@ -159,8 +159,10 @@ body {
 }
 
 .hero-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-content p {
@@ -171,7 +173,11 @@ body {
 .btn-cta {
     background-color: var(--primary-color);
     color: #fff;
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(255, 0, 84, 0.3);
     border: none;
     border-radius: 4px;
     font-size: 1rem;
@@ -209,16 +215,28 @@ main {
     border-radius: 8px;
     text-align: center;
     transition: var(--transition);
-    border: 1px solid var(--border-color);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform-origin: center;
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
 }
 
 .service-item:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.service-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.service-item:nth-child(3) {
+    animation-delay: 0.4s;
 }
 
 .service-item h3 {
     color: #333333; /* Color fijo oscuro independiente del tema */
-    margin-bottom: 0.5rem;
 }
 
 /* Asegurar que el modo oscuro no afecte el color del h3 */
@@ -232,6 +250,7 @@ main {
     margin-bottom: 1rem;
     border-radius: 8px;
     overflow: hidden;
+    position: relative;
 }
 
 .service-image img {
@@ -243,6 +262,22 @@ main {
 
 .service-item:hover .service-image img {
     transform: scale(1.1);
+}
+
+.service-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-item:hover .service-image::after {
+    opacity: 1;
 }
 
 /* ======= PORTFOLIO ======= */
@@ -265,10 +300,33 @@ main {
     text-align: center;
     transition: var(--transition);
     border: 1px solid var(--border-color);
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+    overflow: hidden;
+    position: relative;
 }
 
 .portfolio-item:hover {
     transform: scale(1.05);
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+}
+
+.portfolio-item h3 {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to top, var(--card-bg) 50%, transparent);
+    margin: 0;
+    padding: 1rem;
 }
 
 /* ======= CONTACT FORM ======= */
@@ -283,6 +341,10 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-form label {
@@ -293,17 +355,19 @@ main {
 .contact-form textarea {
     width: 100%;
     padding: 0.7rem;
-    border: 1px solid var(--border-color);
+    border: 2px solid transparent;
     border-radius: 4px;
     font-size: 1rem;
-    background-color: var(--bg-color);
+    background: var(--bg-color);
     color: var(--text-color);
+    transition: all 0.3s ease;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    outline: 2px solid var(--primary-color);
-    box-shadow: 0 0 5px rgba(255, 0, 84, 0.3);
+    border-color: var(--primary-color);
+    outline: none;
+    transform: translateY(-2px);
 }
 
 .btn-submit {
@@ -571,14 +635,32 @@ footer {
     transform: translateY(0);
 }
 
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .spotify-embed {
     max-width: 800px;
     margin: 2rem auto;
     padding: 1rem;
-    background: var(--card-bg);
+    background: linear-gradient(135deg, var(--card-bg), var(--bg-color));
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 12px;
     border: 1px solid var(--border-color);
-    transition: var(--transition);
+}
+
+.spotify-embed:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
 }
 
 .spotify-embed h3 {
