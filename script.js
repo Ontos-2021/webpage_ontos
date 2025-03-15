@@ -27,6 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
             isDark ? 'fa-sun' : 'fa-moon'
         );
 
+        // Actualizar color del iframe de Spotify
+        const spotifyIframe = document.querySelector('.spotify-embed iframe');
+        if (spotifyIframe) {
+            const currentSrc = new URL(spotifyIframe.src);
+            currentSrc.searchParams.set('theme', isDark ? '1' : '0');
+            spotifyIframe.src = currentSrc.toString();
+        }
+
         // Remover clase de transición después de la animación
         setTimeout(() => {
             document.documentElement.classList.remove('theme-transition');
@@ -94,5 +102,33 @@ document.addEventListener('DOMContentLoaded', () => {
             form.reset();
             form.querySelector('.btn-submit').disabled = false;
         }, 1000);
+    });
+
+    // Detectar preferencia del sistema
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Función para establecer el tema inicial
+    const setInitialTheme = () => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.dataset.theme = savedTheme;
+            if (savedTheme === 'dark') {
+                themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+            }
+        } else if (prefersDarkScheme.matches) {
+            body.dataset.theme = 'dark';
+            themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    // Establecer tema inicial
+    setInitialTheme();
+
+    // Escuchar cambios en la preferencia del sistema
+    prefersDarkScheme.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            toggleTheme(e.matches);
+        }
     });
 });

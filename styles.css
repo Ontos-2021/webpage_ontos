@@ -19,6 +19,11 @@
     --transition: all 0.3s ease;
 }
 
+/* Al inicio del archivo, después de las variables */
+.theme-transition {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 /* 🌙 Modo oscuro automático según preferencia del usuario */
 @media (prefers-color-scheme: dark) {
     :root {
@@ -386,6 +391,21 @@ footer {
     .service-image {
         height: 180px;
     }
+
+    [data-theme="dark"] .nav-links {
+        background-color: var(--navbar-bg);
+        border-top: 1px solid var(--border-color);
+    }
+
+    [data-theme="dark"] .nav-links li {
+        border-color: var(--border-color);
+    }
+
+    /* Mejorar contraste del toggle en modo oscuro */
+    [data-theme="dark"] #mobile-menu-toggle,
+    [data-theme="dark"] #theme-toggle {
+        color: var(--text-color);
+    }
 }
 
 /* Tablets y dispositivos medianos */
@@ -647,4 +667,15 @@ img[src$="default.webp"] {
     padding: 1rem;
     background: var(--card-bg);
     opacity: 0.8; /* Hacer la imagen por defecto más sutil */
+}
+
+/* Mejorar contraste de textos en modo oscuro */
+[data-theme="dark"] .service-item h3,
+[data-theme="dark"] .portfolio-item h3 {
+    color: var(--text-color);
+}
+
+/* Ajustar color de fondo del iframe de Spotify en modo oscuro */
+[data-theme="dark"] .spotify-embed {
+    background-color: #282828;
 }
