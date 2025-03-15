@@ -9,13 +9,13 @@
 :root {
     --primary-color: #ff0054;
     --secondary-color: #cc0044;
-    --bg-color: #ffffff;
-    --text-color: #333333;
+    --bg-color: #f8f8f8;          /* Cambiado de #ffffff a un gris muy claro */
+    --text-color: #2d2d2d;        /* Cambiado de #333333 a un tono más oscuro */
     --hero-text-color: #ffffff; /* Cambiado: siempre blanco para mejor contraste con el hero background */
-    --navbar-bg: rgba(255, 255, 255, 0.95);
-    --card-bg: #f8f8f8;
-    --footer-bg: #f0f0f0;
-    --border-color: #dddddd;
+    --navbar-bg: rgba(248, 248, 248, 0.95); /* Ajustado para coincidir con bg-color */
+    --card-bg: #ffffff;           /* Cambiado para crear contraste con el fondo */
+    --footer-bg: #ececec;         /* Ligeramente más oscuro */
+    --border-color: #e0e0e0;      /* Más oscuro para mejor definición */
     --transition: all 0.3s ease;
 }
 
@@ -69,6 +69,7 @@ body {
     background-color: var(--navbar-bg);
     transition: var(--transition);
     z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .navbar.scrolled {
@@ -125,7 +126,7 @@ body {
 
 /* ======= HERO SECTION ======= */
 .hero-section {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),
                 url("./assets/background.webp");
     background-position: center;
     background-size: cover;
@@ -149,25 +150,34 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Overlay oscuro */
+    background: rgba(0, 0, 0, 0.6); /* Overlay más oscuro */
     z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2; /* Por encima del overlay */
+    z-index: 2;
+    text-align: center;
+    padding: 0 1rem;
 }
 
 .hero-content h2 {
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: #ffffff; /* Cambiado a blanco */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada */
+    letter-spacing: 1px;
 }
 
 .hero-content p {
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
+    color: #ffffff; /* Cambiado a blanco */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .btn-cta {
@@ -216,7 +226,7 @@ main {
     text-align: center;
     transition: var(--transition);
     border: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transform-origin: center;
     animation: fadeInUp 0.6s ease-out;
     animation-fill-mode: both;
@@ -327,6 +337,7 @@ main {
     background: linear-gradient(to top, var(--card-bg) 50%, transparent);
     margin: 0;
     padding: 1rem;
+    color: #1a1a1a;              /* Títulos más oscuros para mejor legibilidad */
 }
 
 /* ======= CONTACT FORM ======= */
@@ -404,6 +415,7 @@ main {
     flex: 1;
     min-width: 250px;
     max-width: 350px;
+    border: 1px solid var(--border-color);
 }
 
 .contact-card:hover {
@@ -736,6 +748,7 @@ footer {
 .portfolio-description {
     margin-bottom: 1rem;
     font-style: italic;
+    color: #4a4a4a;              /* Mejor legibilidad para textos descriptivos */
 }
 
 /* Estilos para imágenes que fallan */
