@@ -37,12 +37,12 @@
 }
 
 [data-theme="dark"] {
-    --bg-color: #121212;
+    --bg-color: #1a1a1a;          /* Cambiado de #121212 a un tono más claro */
     --text-color: #ffffff;
-    --navbar-bg: rgba(18, 18, 18, 0.95);
-    --card-bg: #1e1e1e;
-    --footer-bg: #1a1a1a;
-    --border-color: #333333;
+    --navbar-bg: rgba(26, 26, 26, 0.95);
+    --card-bg: #242424;           /* Cambiado de #1e1e1e a un tono más claro */
+    --footer-bg: #242424;         /* Ajustado para coincidir */
+    --border-color: #404040;      /* Más claro para mejor contraste */
 }
 
 html {
@@ -99,6 +99,10 @@ body {
     color: var(--primary-color);
 }
 
+[data-theme="dark"] .nav-links li a:hover {
+    color: #ff3377; /* Un tono más brillante del color primario para modo oscuro */
+}
+
 /* Modo oscuro toggle */
 #theme-toggle {
     background: none;
@@ -126,7 +130,7 @@ body {
 
 /* ======= HERO SECTION ======= */
 .hero-section {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.55)),
                 url("./assets/background.webp");
     background-position: center;
     background-size: cover;
@@ -150,7 +154,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.6); /* Overlay más oscuro */
+    background: rgba(0, 0, 0, 0.45); /* Reducido de 0.6 a 0.45 para hacerlo más claro */
     z-index: 1;
 }
 
@@ -751,6 +755,10 @@ footer {
     color: #4a4a4a;              /* Mejor legibilidad para textos descriptivos */
 }
 
+[data-theme="dark"] .portfolio-description {
+    color: #e0e0e0;
+}
+
 /* Estilos para imágenes que fallan */
 img {
     position: relative;
@@ -845,4 +853,11 @@ img[src$="default.webp"] {
     background: var(--card-bg);
     border-color: var(--border-color);
     color: var(--text-color);
+}
+
+[data-theme="dark"] .service-item,
+[data-theme="dark"] .contact-card,
+[data-theme="dark"] .spotify-embed {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
 }
