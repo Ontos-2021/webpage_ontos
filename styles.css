@@ -506,6 +506,20 @@ footer {
     color: var(--primary-color);
 }
 
+.social-email-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    font-size: inherit;
+    padding: 0;
+    margin: 0 0.5rem;
+}
+
+.social-email-btn:hover {
+    color: var(--primary-color);
+}
+
 /* ======= MEDIA QUERIES ======= */
 @media (max-width: 768px) {
     .hero-section {

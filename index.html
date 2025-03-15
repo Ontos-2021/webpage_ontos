@@ -104,22 +104,12 @@
                         Enviar mensaje
                     </a>
                 </div>
+                <!-- Reemplazar el bloque del email -->
                 <div class="contact-card">
                     <i class="far fa-envelope"></i>
                     <h3>Email</h3>
-                    <p>Contáctame por correo electrónico</p>
-                    <form class="contact-form" onsubmit="return validateForm(event)">
-                        <label for="name">Nombre</label>
-                        <input type="text" id="name" name="name" required>
-                        
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                        
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" required></textarea>
-                        
-                        <button type="submit" class="btn-submit">Enviar</button>
-                    </form>
+                    <p>Puedes escribirme a josemercado.musica@gmail.com</p>
+                    <button id="copy-email" class="btn-contact">Copiar correo</button>
                 </div>
             </div>
         </section>
@@ -131,7 +121,7 @@
             <a href="https://www.linkedin.com/in/jos%C3%A9-mercado-b57b93234/" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
             <a href="https://www.instagram.com/josemercado.music/" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="https://wa.me/5491123162470" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="mailto:josemercado.musica@gmail.com" aria-label="Email" title="Email"><i class="far fa-envelope"></i></a>
+            <button class="social-email-btn" aria-label="Copiar Email" title="Copiar Email"><i class="far fa-envelope"></i></button>
         </div>
         <p>&copy; 2025 José Mercado. Todos los derechos reservados.</p>
     </footer>

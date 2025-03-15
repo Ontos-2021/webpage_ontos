@@ -136,6 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     animatedElements.forEach(element => observer.observe(element));
+
+    // Email copy functionality
+    const copyEmailButton = document.getElementById('copy-email');
+    const footerEmailButton = document.querySelector('.social-email-btn');
+    
+    if (copyEmailButton) {
+        copyEmailButton.addEventListener('click', copyEmail);
+    }
+    
+    if (footerEmailButton) {
+        footerEmailButton.addEventListener('click', copyEmail);
+    }
 });
 
 function validateForm(event) {
@@ -157,4 +169,15 @@ function validateForm(event) {
     event.target.reset();
     alert('¡Gracias por tu mensaje! Me pondré en contacto contigo pronto.');
     return false;
+}
+
+function copyEmail() {
+    const email = "josemercado.musica@gmail.com";
+    navigator.clipboard.writeText(email)
+        .then(() => {
+            alert("Email copiado al portapapeles!");
+        })
+        .catch(err => {
+            console.error("Error al copiar el email: ", err);
+        });
 }
