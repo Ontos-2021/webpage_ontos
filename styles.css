@@ -45,6 +45,13 @@
     --border-color: #404040;      /* Más claro para mejor contraste */
 }
 
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .nav-links li a,
+[data-theme="dark"] .logo {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -70,10 +77,27 @@ body {
     transition: var(--transition);
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
 }
 
 .navbar.scrolled {
     background-color: var(--primary-color);
+}
+
+.navbar.scrolled .nav-links li a,
+.navbar.scrolled .logo {
+    color: #ffffff;
+}
+
+.navbar.scrolled .logo {
+    color: #ffffff !important;
+}
+
+.navbar.scrolled * {
+    color: #ffffff !important;
+    fill: #ffffff !important;
 }
 
 .logo {
