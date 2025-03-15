@@ -99,4 +99,53 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleTheme(e.matches);
         }
     });
+
+    // Add navbar scroll effect
+    const navbar = document.querySelector('.navbar');
+    let lastScrollY = window.scrollY;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Add intersection observer for animations
+    const animatedElements = document.querySelectorAll('.service-item, .portfolio-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+    
+    animatedElements.forEach(element => observer.observe(element));
 });
+
+function validateForm(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    
+    if (!name || !email || !message) {
+        alert('Por favor complete todos los campos');
+        return false;
+    }
+    
+    // Here you would typically send the form data to a server
+    console.log('Form submitted:', { name, email, message });
+    
+    // Clear form
+    event.target.reset();
+    alert('¡Gracias por tu mensaje! Me pondré en contacto contigo pronto.');
+    return false;
+}
