@@ -10,14 +10,14 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.josemercado.com/">
+    <meta property="og:url" content="https://www.josemercadomusic.com/">
     <meta property="og:title" content="José Mercado - Ingeniero de Sonido & Productor Musical">
     <meta property="og:description" content="Transformo tus ideas sonoras en experiencias únicas. Servicios de mezcla, masterización y producción musical.">
     <meta property="og:image" content="https://www.josemercado.com/assets/og-image.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.josemercado.com/">
+    <meta property="twitter:url" content="https://www.josemercadomusic.com/">
     <meta property="twitter:title" content="José Mercado - Ingeniero de Sonido & Productor Musical">
     <meta property="twitter:description" content="Transformo tus ideas sonoras en experiencias únicas. Servicios de mezcla, masterización y producción musical.">
     <meta property="twitter:image" content="https://www.josemercado.com/assets/og-image.jpg">
@@ -30,11 +30,27 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
     <link rel="manifest" href="./site.webmanifest">
+    <link rel="canonical" href="https://www.josemercadomusic.com/" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "José Mercado",
+      "url": "https://www.josemercadomusic.com/",
+      "jobTitle": "Ingeniero de Sonido & Productor Musical",
+      "knowsAbout": ["Mezcla", "Masterización", "Producción Musical"],
+      "sameAs": [
+        "https://www.instagram.com/josemercado.music/",
+        "https://www.linkedin.com/in/josé-mercado-b57b93234/"
+      ]
+    }
+    </script>
 </head>
 <body>
     <header class="hero-section" id="inicio">
         <nav class="navbar">
-            <div class="logo">JM</div>
+            <a href="/" class="logo" aria-label="José Mercado - Inicio">JM</a>
             <button id="theme-toggle" aria-label="Cambiar modo oscuro" tabindex="0">
                 <i class="fas fa-moon"></i>
             </button>
@@ -50,7 +66,7 @@
             </ul>
         </nav>
         <div class="hero-content">
-            <h2>Ingeniero de Sonido & Productor Musical</h2>
+            <h1>Ingeniero de Sonido & Productor Musical</h1>
             <p>Transformo tus ideas sonoras en experiencias únicas</p>
             <button class="btn-cta" onclick="document.querySelector('#contacto').scrollIntoView({behavior: 'smooth'})">Contáctame</button>
         </div>
