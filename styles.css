@@ -519,7 +519,7 @@ footer {
     justify-content: center;
 }
 
-/* ======= MEDIA QUERIES ======= */
+/* ======= MEDIA QUERIES ======= */ 
 @media (max-width: 768px) {
     .hero-section {
         min-height: 60vh;
