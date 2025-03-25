@@ -322,6 +322,7 @@ main {
 .portfolio-section {
     text-align: center;
     margin-top: 4rem;
+    padding: 2rem 0;
 }
 
 .portfolio-grid {
@@ -342,6 +343,84 @@ main {
     animation-fill-mode: both;
     overflow: hidden;
     position: relative;
+    margin-bottom: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background-color: var(--card-bg, #f9f9f9);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.portfolio-content {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+.portfolio-info {
+    flex: 1;
+}
+
+.portfolio-info h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.portfolio-description {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary, #666);
+}
+
+.portfolio-image {
+    margin-top: 1.5rem;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-image img:hover {
+    transform: scale(1.02);
+}
+
+.spotify-embed {
+    margin: 1rem 0;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .portfolio-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .portfolio-info {
+        flex: 1;
+    }
+    
+    .portfolio-image {
+        flex: 1;
+        margin-top: 0;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .portfolio-item {
+        --card-bg: #1e1e1e;
+    }
+    
+    .portfolio-description {
+        --text-secondary: #aaa;
+    }
 }
 
 .portfolio-item:hover {
@@ -366,6 +445,34 @@ main {
     margin: 0;
     padding: 1rem;
     color: #1a1a1a;              /* Títulos más oscuros para mejor legibilidad */
+}
+
+/* Album cover specific styles to ensure full display */
+.album-cover-container {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.album-cover-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain; /* Ensures the full image is visible */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.portfolio-image:hover .album-cover-container img {
+    transform: scale(1.02);
+}
+
+/* Override any conflicting styles */
+.portfolio-image .album-cover-container img {
+    max-height: none; /* Remove any height restriction */
+    height: auto;
 }
 
 /* ======= CONTACT FORM ======= */
