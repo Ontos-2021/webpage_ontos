@@ -20,7 +20,7 @@
     <meta property="twitter:url" content="https://www.josemercadomusic.com/">
     <meta property="twitter:title" content="José Mercado - Ingeniero de Sonido & Productor Musical">
     <meta property="twitter:description" content="Transformo tus ideas sonoras en experiencias únicas. Servicios de mezcla, masterización y producción musical.">
-    <meta property="twitter:image" content="https://www.josemercado.com/assets/og-image.jpg">
+    <meta property="twitter:image" content="https://www.josemercadomusic.com/assets/og-image.jpg">
     
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -31,6 +31,23 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
     <link rel="manifest" href="./site.webmanifest">
     <link rel="canonical" href="https://www.josemercadomusic.com/" />
+
+    <!-- Solución temporal para imagen de fondo -->
+    <style>
+        /* Para pantallas estándar, se usa la imagen normal */
+        .hero-section {
+            background-image: url('./assets/background.jpg');
+        }
+        
+        /* Para pantallas retina, intentar con @2x y si no existe usar la estándar */
+        @media
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi) {
+            .hero-section {
+                background-image: url('./assets/background.jpg');
+            }
+        }
+    </style>
 
     <script type="application/ld+json">
     {
@@ -66,7 +83,7 @@
             </ul>
         </nav>
         <div class="hero-content">
-            <h1>Ingeniero de Sonido & Productor Musical</h1>
+            <h2>Ingeniero de Sonido & Productor Musical</h2>
             <p>Transformo tus ideas sonoras en experiencias únicas</p>
             <button class="btn-cta" onclick="document.querySelector('#contacto').scrollIntoView({behavior: 'smooth'})">Contáctame</button>
         </div>
