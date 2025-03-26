@@ -3,10 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    const fallbackImage = './assets/default.webp'; // Ruta de la imagen de respaldo
+    const fallbackImage = './assets/default.webp';
 
-    // Eliminar duplicación: quitamos la verificación inicial y dejamos que setInitialTheme() la maneje
-
+    // Unified theme toggling function
     const toggleTheme = (isDark) => {
         document.documentElement.classList.add('theme-transition');
         
@@ -25,9 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Actualizar color del iframe de Spotify
         const spotifyIframe = document.querySelector('.spotify-embed iframe');
         if (spotifyIframe) {
-            const currentSrc = new URL(spotifyIframe.src);
-            currentSrc.searchParams.set('theme', isDark ? '1' : '0');
-            spotifyIframe.src = currentSrc.toString();
+            try {
+                const currentSrc = new URL(spotifyIframe.src);
+                currentSrc.searchParams.set('theme', isDark ? '1' : '0');
+                spotifyIframe.src = currentSrc.toString();
+            } catch (e) {
+                console.error("Error updating Spotify iframe theme:", e);
+            }
         }
 
         setTimeout(() => {
@@ -35,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     };
 
+    // Theme toggle click handler - single implementation
     themeToggle.addEventListener('click', () => {
         const isDark = body.dataset.theme !== 'dark';
         toggleTheme(isDark);
@@ -44,14 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') themeToggle.click();
     });
 
-    mobileMenuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('mobile-active');
-    });
+    // Mobile menu handler - single implementation
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-active');
+        });
+        
+        mobileMenuToggle.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') mobileMenuToggle.click();
+        });
+    }
 
-    mobileMenuToggle.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') mobileMenuToggle.click();
-    });
-
+    // Close mobile menu when clicking links
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth <= 768) {
@@ -60,12 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Handle window resize
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) {
             navLinks.classList.remove('mobile-active');
         }
     });
 
+    // Image error handling
     document.querySelectorAll('img').forEach(img => {
         img.addEventListener('error', () => {
             img.src = fallbackImage;
@@ -73,18 +83,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Detectar preferencia del sistema y establecer tema inicial
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
+    // Theme detection and initialization
     const setInitialTheme = () => {
-        if (isIOS()) {
-            // Forzar modo light en iOS para evitar problemas conocidos
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        
+        if (isIOS) {
+            // Force light mode on iOS to avoid known issues
             body.dataset.theme = 'light';
             localStorage.setItem('theme', 'light');
             themeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
             return;
         }
+        
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             body.dataset.theme = savedTheme;
@@ -103,16 +114,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInitialTheme();
 
+    // Listen for system theme changes
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     prefersDarkScheme.addEventListener('change', (e) => {
         if (!localStorage.getItem('theme')) {
             toggleTheme(e.matches);
         }
     });
 
-    // Add navbar scroll effect
+    // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
-    let lastScrollY = window.scrollY;
-    
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -121,23 +132,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Add intersection observer for animations
+    // Animation with Intersection Observer
     const animatedElements = document.querySelectorAll('.service-item, .portfolio-item');
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.2
-    });
-    
-    animatedElements.forEach(element => observer.observe(element));
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        animatedElements.forEach(element => observer.observe(element));
+    }
 
-    // Email copy functionality
+    // Email functionality
     const copyEmailButton = document.getElementById('copy-email');
     const footerEmailButton = document.querySelector('.social-email-btn');
     
@@ -162,10 +173,8 @@ function validateForm(event) {
         return false;
     }
     
-    // Here you would typically send the form data to a server
     console.log('Form submitted:', { name, email, message });
     
-    // Clear form
     event.target.reset();
     alert('¡Gracias por tu mensaje! Me pondré en contacto contigo pronto.');
     return false;

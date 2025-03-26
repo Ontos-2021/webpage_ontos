@@ -154,11 +154,12 @@ body {
 
 /* ======= HERO SECTION ======= */
 .hero-section {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.55)),
+    /* Definición limpia y unificada del fondo */
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                 url("./assets/background.webp");
     background-position: center;
     background-size: cover;
-    background-attachment: fixed; /* Efecto parallax */
+    background-attachment: fixed; /* Efecto parallax para desktop */
     background-repeat: no-repeat;
     min-height: 100vh;
     display: flex;
@@ -171,6 +172,7 @@ body {
     position: relative;
 }
 
+/* Single ::before definition with proper z-index */
 .hero-section::before {
     content: '';
     position: absolute;
@@ -178,7 +180,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.45); /* Reducido de 0.6 a 0.45 para hacerlo más claro */
+    background: rgba(0, 0, 0, 0.45);
     z-index: 1;
 }
 
@@ -629,9 +631,13 @@ footer {
 /* ======= MEDIA QUERIES ======= */ 
 @media (max-width: 768px) {
     .hero-section {
-        min-height: 60vh;
-        background-attachment: scroll; /* Deshabilitar parallax en móviles */
+        min-height: 100vh;
+        background-attachment: scroll; /* Better performance on mobile */
         background-position: center center;
+    }
+
+    .hero-section::before {
+        background: rgba(0, 0, 0, 0.5); /* Slightly darker overlay for mobile */
     }
 
     .hero-content h2 {
@@ -639,58 +645,51 @@ footer {
     }
 
     .nav-links {
-        display: none; /* Ocultar menú en móviles, reemplazar con botón si es necesario */
-    }
-
-    #mobile-menu-toggle {
-        display: block;
-    }
-    .nav-links {
+        display: none;
         position: absolute;
-        top: 70px; /* ajustar según el alto del navbar */
+        top: 70px;
         left: 0;
         width: 100%;
         background-color: var(--navbar-bg);
         flex-direction: column;
         gap: 0;
-        display: none;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    /* Mostrar menú al activarlo */
+    
     .nav-links.mobile-active {
         display: flex;
     }
+    
     .nav-links li {
         width: 100%;
         text-align: center;
         padding: 1rem 0;
+        border-top: 1px solid var(--border-color);
     }
+    
     .nav-links li a {
         display: block;
         width: 100%;
+    }
+
+    #mobile-menu-toggle {
+        display: block;
+        order: 3;
     }
 
     .service-image {
         height: 180px;
     }
 
-    [data-theme="dark"] .nav-links {
-        background-color: var(--navbar-bg);
-        border-top: 1px solid var(--border-color);
-    }
-
-    [data-theme="dark"] .nav-links li {
-        border-color: var(--border-color);
-    }
-
-    /* Mejorar contraste del toggle en modo oscuro */
-    [data-theme="dark"] #mobile-menu-toggle,
-    [data-theme="dark"] #theme-toggle {
-        color: var(--text-color);
+    .services, .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .contact-card {
         width: 100%;
-        margin: 1rem;
+        margin: 1rem 0;
     }
     
     .contact-options {
