@@ -1,27 +1,68 @@
-/* ======= GENERAL STYLES ======= */
+/* ======= VARIABLES Y TIPOGRAFÍA UNIFICADAS ======= */
+:root {
+    --primary-color: #DC143C;
+    --secondary-color: #8B0000;
+    --tertiary-color: #4A90E2;
+    --bg-color: #FAFAFA;
+    --text-color: #1D1D1F;
+    --hero-text-color: #ffffff;
+    --navbar-bg: rgba(250, 250, 250, 0.95);
+    --card-bg: #ffffff;
+    --footer-bg: #ECECEC;
+    --border-color: #E0E0E0;
+    --transition: all 0.3s ease;
+    --text-secondary: #4a4a4a;
+    /* Tipografía */
+    --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Merriweather', Georgia, serif;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+    --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    --text-3xl: clamp(1.875rem, 1.6rem + 1.375vw, 2.5rem);
+    --text-4xl: clamp(2.25rem, 1.9rem + 1.75vw, 3.5rem);
+}
+
+[data-theme="dark"] {
+    --primary-color: #FF6B6B;
+    --secondary-color: #4ECDC4;
+    --tertiary-color: #FFE66D;
+    --bg-color: #0F1419;
+    --text-color: #F0F6FC;
+    --hero-text-color: #ffffff;
+    --navbar-bg: rgba(15, 20, 25, 0.95);
+    --card-bg: #1C2128;
+    --footer-bg: #1C2128;
+    --border-color: #30363D;
+    --text-secondary: #8B949E;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: var(--font-primary);
 }
 
-:root {
-    --primary-color: #DC143C; /* Nuevo rojo principal */
-    --secondary-color: #8B0000; /* Rojo oscuro para hover */
-    --tertiary-color: #4A90E2; /* Azul profesional para enlaces */
-    --bg-color: #FAFAFA; /* Blanco cálido */
-    --text-color: #1D1D1F; /* Negro profundo */
-    --hero-text-color: #ffffff; /* Se mantiene */
-    --navbar-bg: rgba(250, 250, 250, 0.95); /* Gris claro */
-    --card-bg: #ffffff; /* Contraste con fondo claro */
-    --footer-bg: #ECECEC; /* Gris muy claro */
-    --border-color: #E0E0E0; /* Gris claro */
-    --transition: all 0.3s ease;
-    --text-secondary: #4a4a4a;
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: var(--transition);
+    line-height: 1.6;
+    font-family: var(--font-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
-/* Al inicio del archivo, después de las variables */
+/* ======= GENERAL STYLES ======= */
 .theme-transition {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -653,6 +694,156 @@ footer {
     justify-content: center;
 }
 
+/* ======= ANIMACIONES ======= */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+    will-change: opacity, transform;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.spotify-embed {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--card-bg), var(--bg-color));
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.spotify-embed:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
+.spotify-embed h3 {
+    margin-bottom: 0.5rem;
+}
+
+
+.portfolio-description {
+    margin-bottom: 1rem;
+    font-style: italic;
+    color: #e0e0e0; /* Siempre claro dentro del card */
+}
+
+[data-theme="dark"] .portfolio-description {
+    color: #e0e0e0;
+}
+
+/* Eliminado img::after: los pseudoelementos no funcionan en <img> */
+
+/* Mejorar contraste y legibilidad */
+.service-item p {
+    color: var(--text-color);
+    line-height: 1.6;
+    opacity: 0.9;
+}
+.portfolio-item p,
+.portfolio-item span,
+.portfolio-item a,
+.portfolio-item li {
+    color: #fff !important;
+    opacity: 0.95;
+}
+
+/* Mejorar presentación de imágenes */
+.service-image,
+.portfolio-item img {
+    background: var(--card-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Mejorar transiciones */
+.service-item,
+.portfolio-item,
+.spotify-embed {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* Asegurar contraste en modo oscuro */
+[data-theme="dark"] .service-image,
+[data-theme="dark"] .portfolio-item img {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajustar responsive para imágenes */
+@media (max-width: 768px) {
+    .service-image,
+    .portfolio-item img {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Ajustes para imágenes y fallbacks */
+.service-image img,
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+    max-height: 200px; /* Limitar altura máxima */
+}
+
+.service-image,
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--card-bg);
+}
+
+/* Estilos específicos para imagen por defecto */
+img[src$="default.webp"] {
+    object-fit: contain; /* Cambiar a contain para mejor proporción */
+    padding: 1rem;
+    background: var(--card-bg);
+    opacity: 0.8; /* Hacer la imagen por defecto más sutil */
+}
+
+/* Mejorar contraste de textos en modo oscuro */
+[data-theme="dark"] .service-item h3,
+[data-theme="dark"] .portfolio-item h3 {
+    color: var(--text-color);
+}
+
+/* Ajustar color de fondo del iframe de Spotify en modo oscuro */
+[data-theme="dark"] .spotify-embed {
+    background-color: #282828;
+}
+
+[data-theme="dark"] .contact-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .service-item,
+[data-theme="dark"] .contact-card,
+[data-theme="dark"] .spotify-embed {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+}
+
 /* ======= MEDIA QUERIES ======= */ 
 @media (max-width: 768px) {
     .hero-section {
@@ -862,161 +1053,4 @@ footer {
         max-height: 80vh;
         overflow-y: auto;
     }
-}
-/* 
-Optimización para retina displays (comentado porque no existe background@2x.jpg)
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .hero-section {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
-                         url("./assets/background@2x.jpg"); /* Versión 2x de la imagen */
-*/
-
-/* ======= ANIMACIONES ======= */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: var(--transition);
-    will-change: opacity, transform;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.spotify-embed {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background: linear-gradient(135deg, var(--card-bg), var(--bg-color));
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    transform: translateY(0);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-}
-
-.spotify-embed:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-}
-
-.spotify-embed h3 {
-    margin-bottom: 0.5rem;
-}
-
-
-.portfolio-description {
-    margin-bottom: 1rem;
-    font-style: italic;
-    color: #e0e0e0; /* Siempre claro dentro del card */
-}
-
-[data-theme="dark"] .portfolio-description {
-    color: #e0e0e0;
-}
-
-/* Eliminado img::after: los pseudoelementos no funcionan en <img> */
-
-/* Mejorar contraste y legibilidad */
-.service-item p {
-    color: var(--text-color);
-    line-height: 1.6;
-    opacity: 0.9;
-}
-.portfolio-item p,
-.portfolio-item span,
-.portfolio-item a,
-.portfolio-item li {
-    color: #fff !important;
-    opacity: 0.95;
-}
-
-/* Mejorar presentación de imágenes */
-.service-image,
-.portfolio-item img {
-    background: var(--card-bg);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Mejorar transiciones */
-.service-item,
-.portfolio-item,
-.spotify-embed {
-    will-change: transform;
-    backface-visibility: hidden;
-}
-
-/* Asegurar contraste en modo oscuro */
-[data-theme="dark"] .service-image,
-[data-theme="dark"] .portfolio-item img {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Ajustar responsive para imágenes */
-@media (max-width: 768px) {
-    .service-image,
-    .portfolio-item img {
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-}
-
-/* Ajustes para imágenes y fallbacks */
-.service-image img,
-.portfolio-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-    max-height: 200px; /* Limitar altura máxima */
-}
-
-.service-image,
-.portfolio-item {
-    position: relative;
-    overflow: hidden;
-    background: var(--card-bg);
-}
-
-/* Estilos específicos para imagen por defecto */
-img[src$="default.webp"] {
-    object-fit: contain; /* Cambiar a contain para mejor proporción */
-    padding: 1rem;
-    background: var(--card-bg);
-    opacity: 0.8; /* Hacer la imagen por defecto más sutil */
-}
-
-/* Mejorar contraste de textos en modo oscuro */
-[data-theme="dark"] .service-item h3,
-[data-theme="dark"] .portfolio-item h3 {
-    color: var(--text-color);
-}
-
-/* Ajustar color de fondo del iframe de Spotify en modo oscuro */
-[data-theme="dark"] .spotify-embed {
-    background-color: #282828;
-}
-
-[data-theme="dark"] .contact-card {
-    background: var(--card-bg);
-    border-color: var(--border-color);
-    color: var(--text-color);
-}
-
-[data-theme="dark"] .service-item,
-[data-theme="dark"] .contact-card,
-[data-theme="dark"] .spotify-embed {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-color);
 }
