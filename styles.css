@@ -136,22 +136,28 @@ body {
     will-change: transform;
 }
 
+
+/* Comportamiento base del navbar al hacer scroll */
 .navbar.scrolled {
     background-color: var(--primary-color);
 }
 
-.navbar.scrolled .nav-links li a,
-.navbar.scrolled .logo {
+/* Modo oscuro: texto blanco al hacer scroll */
+[data-theme="dark"] .navbar.scrolled .nav-links li a,
+[data-theme="dark"] .navbar.scrolled .logo,
+[data-theme="dark"] .navbar.scrolled #mobile-menu-toggle,
+[data-theme="dark"] .navbar.scrolled #theme-toggle {
     color: #ffffff;
+    fill: #ffffff;
 }
 
-.navbar.scrolled .logo {
-    color: #ffffff !important;
-}
-
-.navbar.scrolled * {
-    color: #ffffff !important;
-    fill: #ffffff !important;
+/* Modo claro: mantener texto oscuro al hacer scroll */
+[data-theme="light"] .navbar.scrolled .nav-links li a,
+[data-theme="light"] .navbar.scrolled .logo,
+[data-theme="light"] .navbar.scrolled #mobile-menu-toggle,
+[data-theme="light"] .navbar.scrolled #theme-toggle {
+    color: var(--text-color);
+    fill: currentColor;
 }
 
 .logo {
