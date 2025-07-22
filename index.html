@@ -48,9 +48,27 @@
         <!-- Carrusel de fondo -->
         <div class="background-carousel">
             <div class="carousel-slides">
-            <div class="carousel-slide active" style="background-image: url('./assets/background.webp');"></div>
-            <div class="carousel-slide" style="background-image: url('./assets/background-2.webp');"></div>
-            <div class="carousel-slide" style="background-image: url('./assets/recording.webp');"></div>
+                <div class="carousel-slide active">
+                    <picture>
+                        <source srcset="./assets/background.jpg" type="image/jpeg">
+                        <source srcset="./assets/background.webp" type="image/webp">
+                        <img src="./assets/background.jpg" alt="José Mercado operando una consola" loading="eager">
+                    </picture>
+                </div>
+                <div class="carousel-slide">
+                    <picture>
+                        <source srcset="./assets/background-2.jpg" type="image/jpeg">
+                        <source srcset="./assets/background-2.webp" type="image/webp">
+                        <img src="./assets/background-2.jpg" alt="José Mercado haciendo monitoreo a Daniel Maza" loading="lazy">
+                    </picture>
+                </div>
+                <div class="carousel-slide">
+                    <picture>
+                        <source srcset="./assets/recording.jpg" type="image/jpeg">
+                        <source srcset="./assets/recording.webp" type="image/webp">
+                        <img src="./assets/recording.jpg" alt="Batería de Fabian Sapo Miodownik microfoneada para ser grabada" loading="lazy">
+                    </picture>
+                </div>
             </div>
             
             <!-- Controles del carrusel -->
