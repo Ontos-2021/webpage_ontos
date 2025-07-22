@@ -38,6 +38,26 @@
 </head>
 <body>
     <header class="hero-section" id="inicio">
+        <!-- Carrusel de fondo -->
+        <div class="background-carousel">
+            <div class="carousel-slides">
+            <div class="carousel-slide active" style="background-image: url('./assets/background.webp');"></div>
+            <div class="carousel-slide" style="background-image: url('./assets/background-2.webp');"></div>
+            <div class="carousel-slide" style="background-image: url('./assets/recording.webp');"></div>
+            </div>
+            
+            <!-- Controles del carrusel -->
+            <div class="carousel-controls">
+            <button class="carousel-prev" aria-label="Imagen anterior"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel-indicators">
+                <button class="indicator active" data-index="0" aria-label="Imagen 1"></button>
+                <button class="indicator" data-index="1" aria-label="Imagen 2"></button>
+                <button class="indicator" data-index="2" aria-label="Imagen 3"></button>
+            </div>
+            <button class="carousel-next" aria-label="Imagen siguiente"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
         <nav class="navbar">
             <a href="/" class="logo" aria-label="José Mercado - Inicio">JM</a>
             <button id="theme-toggle" aria-label="Cambiar modo oscuro" tabindex="0">

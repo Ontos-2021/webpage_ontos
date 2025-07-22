@@ -99,6 +99,26 @@ body {
     --text-secondary: #8B949E; /* Gris plateado */
 }
 
+/* Estilos para el carrusel en modo oscuro */
+[data-theme="dark"] .carousel-prev, 
+[data-theme="dark"] .carousel-next {
+    background: rgba(255, 255, 255, 0.3);
+    color: black;
+}
+
+[data-theme="dark"] .carousel-prev:hover, 
+[data-theme="dark"] .carousel-next:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .indicator {
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="dark"] .indicator.active {
+    background: rgba(255, 255, 255, 0.8);
+}
+
 [data-theme="dark"] .navbar,
 [data-theme="dark"] .nav-links li a,
 [data-theme="dark"] .logo {
@@ -214,18 +234,7 @@ body {
 
 /* ======= HERO SECTION ======= */
 .hero-section {
-    /* Definición limpia y unificada del fondo */
-    /* Fallback para navegadores que no soportan webp */
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url("./assets/background.webp");
-    /* Fallback para iOS y navegadores antiguos */
-    background-image:
-        linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url("./assets/background.webp");
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed; /* Efecto parallax para desktop */
-    background-repeat: no-repeat;
+    /* Removemos el background fijo para que el carrusel maneje las imágenes */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -235,26 +244,127 @@ body {
     padding: 5rem 2rem;
     color: var(--hero-text-color);
     position: relative;
+    /* Asegurar que el contenido esté sobre el carrusel */
+    z-index: 1;
 }
 
-/* Corrige el fondo en móviles (iOS/Safari/Android) */
-@media (max-width: 900px), (pointer: coarse) {
-  .hero-section {
-    background-attachment: scroll !important;
-  }
+/* ======= CARRUSEL DE FONDO ======= */
+.background-carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
 }
 
-/* Single ::before definition with proper z-index */
-.hero-section::before {
+.carousel-slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+/* Overlay oscuro sobre las imágenes del carrusel */
+.carousel-slide::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
     z-index: 1;
 }
+
+/* Controles del carrusel */
+.carousel-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 5;
+}
+
+.carousel-prev, .carousel-next {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 16px;
+}
+
+.carousel-prev:hover, .carousel-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-indicators {
+    display: flex;
+    gap: 8px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease;
+}
+
+.indicator.active {
+    background: white;
+}
+
+/* Ajustes responsivos para controles del carrusel */
+@media (max-width: 768px) {
+    .carousel-controls {
+        bottom: 15px;
+        gap: 10px;
+    }
+    
+    .carousel-prev, .carousel-next {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    
+    .indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* Corrige el fondo en móviles (iOS/Safari/Android) - ya no necesario para el carrusel */
 
 .hero-content {
     position: relative;

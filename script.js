@@ -159,6 +159,73 @@ document.addEventListener('DOMContentLoaded', () => {
     if (footerEmailButton) {
         footerEmailButton.addEventListener('click', copyEmail);
     }
+
+    // ======= CARRUSEL DE IMÁGENES DE FONDO =======
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    let currentIndex = 0;
+    let interval;
+
+    // Función para cambiar de slide
+    function goToSlide(index) {
+        // Eliminar clase active de todos los slides e indicadores
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        
+        // Ajustar el índice si está fuera de rango
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        
+        // Activar el slide e indicador correspondiente
+        if (slides[index]) slides[index].classList.add('active');
+        if (indicators[index]) indicators[index].classList.add('active');
+        currentIndex = index;
+    }
+
+    // Iniciar carrusel automático
+    function startAutoSlide() {
+        if (slides.length > 1) {
+            interval = setInterval(() => {
+                goToSlide(currentIndex + 1);
+            }, 5000); // Cambiar cada 5 segundos
+        }
+    }
+
+    // Detener carrusel automático al interactuar
+    function resetAutoSlide() {
+        clearInterval(interval);
+        startAutoSlide();
+    }
+
+    // Configurar botones y eventos si existen
+    if (prevBtn && slides.length > 1) {
+        prevBtn.addEventListener('click', () => {
+            goToSlide(currentIndex - 1);
+            resetAutoSlide();
+        });
+    }
+
+    if (nextBtn && slides.length > 1) {
+        nextBtn.addEventListener('click', () => {
+            goToSlide(currentIndex + 1);
+            resetAutoSlide();
+        });
+    }
+
+    // Configurar indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            goToSlide(index);
+            resetAutoSlide();
+        });
+    });
+
+    // Iniciar carrusel solo si hay slides
+    if (slides.length > 0) {
+        startAutoSlide();
+    }
 });
 
 function validateForm(event) {
